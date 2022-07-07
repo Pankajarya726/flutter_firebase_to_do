@@ -25,51 +25,45 @@ class _LoginScreenState extends State<LoginScreen> {
       onTap: () => _emailFocusNode.unfocus(),
       child: Scaffold(
         backgroundColor: CustomColors.firebaseNavy,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-              bottom: 20.0,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Row(),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'TO DO APP',
-                        style: TextStyle(
-                          color: CustomColors.firebaseOrange,
-                          fontSize: 40,
-                        ),
-                      ),
-                    ],
+        body: Center(
+          child: SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                bottom: 20.0,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'TO DO APP',
+                    style: TextStyle(
+                      color: CustomColors.firebaseOrange,
+                      fontSize: 40,
+                    ),
                   ),
-                ),
-                FutureBuilder(
-                  future: _initializeFirebase(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return const Text('Error initializing Firebase');
-                    } else if (snapshot.connectionState == ConnectionState.done) {
-                      return LoginForm(
-                        focusNode1: _emailFocusNode,
-                        focusNode2: _passFocusNode,
+                  FutureBuilder(
+                    future: _initializeFirebase(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text('Error initializing Firebase');
+                      } else if (snapshot.connectionState == ConnectionState.done) {
+                        return LoginForm(
+                          focusNode1: _emailFocusNode,
+                          focusNode2: _passFocusNode,
+                        );
+                      }
+                      return CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          CustomColors.firebaseOrange,
+                        ),
                       );
-                    }
-                    return CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        CustomColors.firebaseOrange,
-                      ),
-                    );
-                  },
-                ),
-              ],
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

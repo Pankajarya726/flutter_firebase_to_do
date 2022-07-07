@@ -32,12 +32,12 @@ class _NoteScreenState extends State<NoteScreen> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => AddNoteScreen(),
+              builder: (context) => const AddNoteScreen(),
             ),
           );
         },
         backgroundColor: CustomColors.firebaseOrange,
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.white,
           size: 32,
@@ -54,7 +54,7 @@ class _NoteScreenState extends State<NoteScreen> {
             stream: Database.readItems(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return Text('Something went wrong');
+                return const Text('Something went wrong');
               } else if (snapshot.hasData || snapshot.data != null) {
                 return ListView.separated(
                   separatorBuilder: (context, index) => SizedBox(height: 16.0),
@@ -99,7 +99,10 @@ class _NoteScreenState extends State<NoteScreen> {
                           maxLines: 5,
                           overflow: TextOverflow.ellipsis,
                         ),
+                        contentPadding: const EdgeInsets.only(right: 0, left: 15, top: 10, bottom: 10),
                         trailing: PopupMenuButton<String>(
+                          padding: const EdgeInsets.all(2),
+                          splashRadius: 15,
                           onSelected: (value) {
                             handleClick(value, title, description, docID);
                           },
