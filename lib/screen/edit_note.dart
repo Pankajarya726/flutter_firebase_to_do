@@ -98,7 +98,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                   ),
           ],
         ),
-        body: SafeArea(
+        body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(
               left: 16.0,
